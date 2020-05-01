@@ -21,7 +21,7 @@
   ],
   "license": "MIT",
   "main": "cloudworker.js",
-  "name": "@dollarshaveclub/cloudworker",
+  "name": "cloudworker-tls-fetch-only",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ArtskydJ/cloudworker-tls-fetch-only.git"
