@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 
 const program = require('commander')
-const Cloudworker = require('../cloudworker')
+const Cloudworker = require('..')
 const fs = require('fs')
 const path = require('path')
+const utils = require('../lib/utils')
+const wasmLoader = require('../lib/wasm')
 
 let file = null
 
@@ -14,6 +16,14 @@ function collect (val, memo) {
 
 program
   .usage('[options] <file>')
+  .option('-p, --port <port>', 'Port', 3000)
+  .option('-d, --debug', 'Debug', false)
+  .option('-s, --kv-set [variable.key=value]', 'Binds variable to a local implementation of Workers KV and sets key to value', collect, [])
+  .option('-f, --kv-file [variable=path]', 'Set the filepath for value peristence for the local implementation of Workers KV', collect, [])
+  .option('-w, --wasm [variable=path]', 'Binds variable to wasm located at path', collect, [])
+  .option('-c, --enable-cache', 'Enables cache <BETA>', false)
+  .option('-r, --watch', 'Watch the worker script and restart the worker when changes are detected', false)
+  .option('-s, --set [variable.key=value]', '(Deprecated) Binds variable to a local implementation of Workers KV and sets key to value', collect, [])
   .option('--tls-key <tlsKey>', 'Optional. Path to encryption key for serving requests with TLS enabled. Must specify --tls-cert when using this option.')
   .option('--tls-cert <tlsCert>', 'Optional. Path to certificate for serving requests with TLS enabled. Must specify --tls-key when using this option.')
   .option('--https-port <httpsPort>', 'Optional. Port to listen on for HTTPS requests. Must specify --tls-cert and --tls-key when using this option. May not be the same value as --port.', 3001)
@@ -25,12 +35,23 @@ if (typeof file !== 'string') {
   process.exit(1)
 }
 
-run(file)
+const wasmBindings = utils.parseWasmFlags(program.wasm)
+wasmLoader.loadBindings(wasmBindings).then(res => {
+  run(file, res)
+}).catch(error => {
+  console.error(error)
+  process.exit(1)
+})
 
-function run (file) {
+function run (file, wasmBindings) {
   console.log('Starting up...')
   const fullpath = path.resolve(process.cwd(), file)
-  const script = fs.readFileSync(fullpath).toString('utf-8')
+  const script = utils.read(fullpath)
+  const bindings = utils.extractKVBindings(program.kvSet.concat(program.set), program.kvFile)
+  Object.assign(bindings, wasmBindings)
+
+  // Add a warning log for deprecation
+  if (program.set.length > 0) console.warn('Warning: Flag --set is now deprecated, please use --kv-set instead')
 
   if ((program.tlsKey && !program.tlsCert) || (!program.tlsKey && program.tlsCert)) {
     console.error('Both --tls-key and --tls-cert must be set when using TLS.')
@@ -57,6 +78,7 @@ function run (file) {
   const opts = {
     debug: program.debug,
     enableCache: program.enableCache,
+    bindings: bindings,
     tlsKey: tlsKey,
     tlsCert: tlsCert,
   }
