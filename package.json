@@ -1,0 +1,30 @@
+{
+  "bin": {
+    "cloudworker": "bin.js"
+  },
+  "bugs": {
+    "url": "https://github.com/ArtskydJ/cloudworker-tls-fetch-only/issues"
+  },
+  "dependencies": {
+    "@dollarshaveclub/node-fetch": "^3.1.0",
+    "commander": "^2.19.0"
+  },
+  "description": "node.js runner for Cloudflare Workers",
+  "homepage": "https://github.com/ArtskydJ/cloudworker-tls-fetch-only#readme",
+  "keywords": [
+    "cloudflare",
+    "service worker",
+    "workers",
+    "worker",
+    "cloudflare worker",
+    "cloudworker"
+  ],
+  "license": "MIT",
+  "main": "cloudworker.js",
+  "name": "@dollarshaveclub/cloudworker",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArtskydJ/cloudworker-tls-fetch-only.git"
+  },
+  "version": "0.0.11"
+}
