@@ -1,5 +1,7 @@
 # cloudworker-tls-no-crypto
 
+[![CircleCI](https://circleci.com/gh/ArtskydJ/cloudworker-tls-no-crypto.svg?style=svg)](https://circleci.com/gh/ArtskydJ/cloudworker-tls-no-crypto)
+
 https://github.com/ArtskydJ/cloudworker-tls-no-crypto is based on https://github.com/supermari0/cloudworker/tree/tls-support-upstream which is based on https://github.com/dollarshaveclub/cloudworker
 
 
