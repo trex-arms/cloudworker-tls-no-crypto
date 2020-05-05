@@ -2,7 +2,9 @@
 
 [![CircleCI](https://circleci.com/gh/ArtskydJ/cloudworker-tls-no-crypto.svg?style=svg)](https://circleci.com/gh/ArtskydJ/cloudworker-tls-no-crypto)
 
-https://github.com/ArtskydJ/cloudworker-tls-no-crypto is based on https://github.com/supermari0/cloudworker/tree/tls-support-upstream which is based on https://github.com/dollarshaveclub/cloudworker
+[This repo][thisrepo] is based on [@supermari0's repo][smrepo] which is based on [@dollarshaveclub's repo][dscrepo]
+
+----------
 
 
 Cloudworker allows you to run Cloudflare Worker scripts locally. 
@@ -106,3 +108,8 @@ cloudworker-tls-no-crypto strives to be as similar to the Cloudflare Worker runt
 
 ## License
 MIT
+
+
+[thisrepo]: https://github.com/ArtskydJ/cloudworker-tls-no-crypto
+[smrepo]: https://github.com/supermari0/cloudworker/tree/tls-support-upstream
+[dscrepo]: https://github.com/dollarshaveclub/cloudworker
