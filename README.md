@@ -6,36 +6,33 @@
 
 ----------
 
-
 Cloudworker allows you to run Cloudflare Worker scripts locally.
 
 ## Installing
-
 Install via NPM:
 ```sh
 npm install -g cloudworker-tls-no-crypto
 ```
-## Package Usage
 
+## Package Usage
 ```js
 const Cloudworker = require('cloudworker-tls-no-crypto')
 
 const simpleScript = `addEventListener('fetch', event => {
-    event.respondWith(new Response('hello', {status: 200}))
+    event.respondWith(new Response('hello', { status: 200 }))
 })`
 
 const req = new Cloudworker.Request('https://myfancywebsite.com/someurl')
 const cw = new Cloudworker(simpleScript)
-cw.dispatch(req).then((res) => {
-    console.log("Response Status: ", res.status)
-    res.text().then((body) =>{
-        console.log("Response Body: ", body)
+cw.dispatch(req).then(res => {
+    console.log(`Response Status: ${res.status}`)
+    res.text().then(body => {
+        console.log(`Response Body: ${body}`)
     })
 })
 ```
 
 ## CLI Usage
-
 ```sh
 Usage: cloudworker [options] <file>
 
@@ -85,7 +82,6 @@ curl localhost:3000/
 ```
 [WebAssembly Source](https://github.com/mdn/webassembly-examples/blob/master/js-api-examples/simple.wat)
 
-
 #### Inverse Square Root
 ```sh
 cloudworker --debug --wasm isqrt=example/isqrt.wasm example/example-wasm-isqrt.js
@@ -93,18 +89,16 @@ curl localhost:3000/?num=9
 ```
 [WebAssembly Source](https://developers.cloudflare.com/workers/api/resource-bindings/webassembly-modules/)
 
-
 #### Resizer 
-
 ```sh
 cloudworker --debug --wasm RESIZER_WASM=example/resizer.wasm example/example-wasm-resizer.js
 curl localhost:3000/wasm-demo/dogdrone.png?width=210 # or open in browser
 ```
 [WebAssembly Source](https://github.com/cloudflare/cloudflare-workers-wasm-demo)
 
+
 ## License
 MIT
-
 
 [thisrepo]: https://github.com/ArtskydJ/cloudworker-tls-no-crypto
 [smrepo]: https://github.com/supermari0/cloudworker/tree/tls-support-upstream
