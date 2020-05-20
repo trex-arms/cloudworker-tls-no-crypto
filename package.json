@@ -1,6 +1,6 @@
 {
   "name": "cloudworker-tls-no-crypto",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "node.js runner for Cloudflare Workers with TLS, but without crypto",
   "main": "index.js",
   "types": "index.d.ts",
