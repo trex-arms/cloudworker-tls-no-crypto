@@ -2,12 +2,12 @@
 
 [![CircleCI](https://circleci.com/gh/ArtskydJ/cloudworker-tls-no-crypto.svg?style=svg)](https://circleci.com/gh/ArtskydJ/cloudworker-tls-no-crypto)
 
-[This repo][thisrepo] is based on [@supermari0's repo][smrepo] which is based on [@dollarshaveclub's repo][dscrepo]
+[This repo][thisrepo] is based on [@supermari0's repo][smrepo], which is based on [@dollarshaveclub's repo][dscrepo].
 
 ----------
 
 
-Cloudworker allows you to run Cloudflare Worker scripts locally. 
+Cloudworker allows you to run Cloudflare Worker scripts locally.
 
 ## Installing
 
@@ -17,20 +17,20 @@ npm install -g cloudworker-tls-no-crypto
 ```
 ## Package Usage
 
-```
+```js
 const Cloudworker = require('cloudworker-tls-no-crypto')
 
 const simpleScript = `addEventListener('fetch', event => {
-  event.respondWith(new Response('hello', {status: 200}))
+    event.respondWith(new Response('hello', {status: 200}))
 })`
 
 const req = new Cloudworker.Request('https://myfancywebsite.com/someurl')
 const cw = new Cloudworker(simpleScript)
 cw.dispatch(req).then((res) => {
-  console.log("Response Status: ", res.status)
-  res.text().then((body) =>{
-    console.log("Response Body: ", body)
-  })
+    console.log("Response Status: ", res.status)
+    res.text().then((body) =>{
+        console.log("Response Body: ", body)
+    })
 })
 ```
 
@@ -101,10 +101,6 @@ cloudworker --debug --wasm RESIZER_WASM=example/resizer.wasm example/example-was
 curl localhost:3000/wasm-demo/dogdrone.png?width=210 # or open in browser
 ```
 [WebAssembly Source](https://github.com/cloudflare/cloudflare-workers-wasm-demo)
-
-## Cloudflare Worker Compatibility 
-
-cloudworker-tls-no-crypto strives to be as similar to the Cloudflare Worker runtime as possible, with the exceptions of supporting TLS, and not supporting crypto. A script should behave the same when executed by Cloudworker and when run within Cloudflare Workers. Please file an issue for scenarios in which Cloudworker behaves differently. As behavior differences are found, this package will be updated to match the Cloudflare Worker runtime. This may result in breakage if scripts depended on those behavior differences.
 
 ## License
 MIT
