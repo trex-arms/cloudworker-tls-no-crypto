@@ -100,6 +100,6 @@ curl localhost:3000/wasm-demo/dogdrone.png?width=210 # or open in browser
 ## License
 MIT
 
-[thisrepo]: https://github.com/ArtskydJ/cloudworker-tls-no-crypto
+[thisrepo]: https://github.com/trex-arms/cloudworker-tls-no-crypto
 [smrepo]: https://github.com/supermari0/cloudworker/tree/tls-support-upstream
 [dscrepo]: https://github.com/dollarshaveclub/cloudworker
